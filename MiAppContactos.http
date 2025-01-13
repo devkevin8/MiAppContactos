@@ -1,0 +1,6 @@
+@MiAppContactos_HostAddress = http://localhost:5204
+
+GET {{MiAppContactos_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
