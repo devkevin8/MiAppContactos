@@ -1,6 +1,6 @@
 using MiAppContactos.Models;
 
-interface IContactosService
+public interface IContactosService
 {
     Task<List<Contacto>> GetContactos();
     Task<Contacto> GetContacto(int id);
