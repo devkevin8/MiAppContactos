@@ -59,12 +59,12 @@ public partial class ApplicationDbContext : DbContext
                 .HasMaxLength(8)
                 .HasColumnName("numeroTelefono");
 
-            entity.HasOne(d => d.IdTipoNumeroNavigation).WithMany(p => p.Contactos)
+            entity.HasOne(d => d.TiposNumero).WithMany(p => p.Contactos)
                 .HasForeignKey(d => d.IdTipoNumero)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("contactos_ibfk_1");
 
-            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Contactos)
+            entity.HasOne(d => d.NombreUsuario).WithMany(p => p.Contactos)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("contactos_ibfk_2");
@@ -73,6 +73,7 @@ public partial class ApplicationDbContext : DbContext
         modelBuilder.Entity<TiposNumero>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasMany(e => e.Contactos).WithOne(e => e.TiposNumero);
 
             entity.ToTable("tiposNumeros");
 

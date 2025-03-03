@@ -1,3 +1,4 @@
+using MiAppContactos.DTOs;
 using MiAppContactos.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,9 +12,23 @@ public class ContactosService : IContactosService
         _context = context;
     }
 
-    public async Task<List<Contacto>> GetContactos()
+    public async Task<List<GetContactosDTO>> GetContactos()
     {
-        return await _context.Contactos.ToListAsync();
+        var contactos = await _context.Contactos
+        .Include(x => x.TiposNumero)
+        .Include(u => u.NombreUsuario)
+        .ToListAsync();
+        var contactosDTO = contactos.Select(x => new GetContactosDTO
+        {
+            Id = x.Id,
+            Nombre = x.Nombre,
+            Apellido = x.Apellido,
+            Telefono = x.NumeroTelefono,
+            Email = x.Email,
+            UsuarioNombre = x.NombreUsuario.Nombre,
+            TiposNumeroNombre = x.TiposNumero.Nombre
+        }).ToList();
+        return contactosDTO;
     }
 
     public async Task<Contacto> GetContacto(int id)

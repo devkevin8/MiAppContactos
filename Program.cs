@@ -2,6 +2,9 @@ using Microsoft.OpenApi.Models;
 using MiAppContactos.Models;
 using Microsoft.EntityFrameworkCore;
 using MiAppContactos.services;
+using Microsoft.AspNetCore.Hosting;
+using MyWorkerService;
+using System.Threading.Channels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +22,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
@@ -28,6 +29,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IContactosService, ContactosService>();
 builder.Services.AddScoped<ITiposNumerosService, TiposNumerosService>();
 builder.Services.AddScoped<IUsuariosService, UsuariosService>();
+
+// Register a Channel for communication
+var channel = Channel.CreateUnbounded<int>();
+builder.Services.AddSingleton(channel);
+
+builder.Services.AddHostedService<Worker>();
 
 builder.Services.AddCors(options =>
 {

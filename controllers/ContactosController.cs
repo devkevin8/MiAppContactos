@@ -1,5 +1,8 @@
+using System.Threading.Channels;
+using MiAppContactos.DTOs;
 using MiAppContactos.Models;
 using Microsoft.AspNetCore.Mvc;
+using MyWorkerService;
 
 namespace MiAppContactos.Controllers;
 
@@ -7,14 +10,16 @@ namespace MiAppContactos.Controllers;
 [ApiController]
 public class ContactosController : ControllerBase
 {
+    private readonly Channel<int> _channel;
     private readonly IContactosService _contactosService;
-    public ContactosController(IContactosService contactosService)
+    public ContactosController(Channel<int> channel, IContactosService contactosService)
     {
+        _channel = channel;
         _contactosService = contactosService;
     }
 
     [HttpGet]
-    public async Task<List<Contacto>> GetContactos()
+    public async Task<List<GetContactosDTO>> GetContactos()
     {
         return await _contactosService.GetContactos();
     }
@@ -22,6 +27,8 @@ public class ContactosController : ControllerBase
     [HttpGet("{id}")]
     public async Task<Contacto> GetContacto(int id)
     {
+        //adding worker to the controller
+        _channel.Writer.WriteAsync(id);
         return await _contactosService.GetContacto(id);
     }
 

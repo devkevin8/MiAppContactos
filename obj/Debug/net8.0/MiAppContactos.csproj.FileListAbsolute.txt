@@ -104,3 +104,8 @@
 /Users/kevinrosales/Documents/C#/MiAppContactos/obj/Debug/net8.0/MiAppContactos.genruntimeconfig.cache
 /Users/kevinrosales/Documents/C#/MiAppContactos/obj/Debug/net8.0/ref/MiAppContactos.dll
 /Users/kevinrosales/Documents/C#/MiAppContactos/obj/Debug/net8.0/MiAppContactos.sourcelink.json
+/Users/kevinrosales/Documents/C#/MiAppContactos/bin/Debug/net8.0/workers/MyWorkerService/appsettings.Development.json
+/Users/kevinrosales/Documents/C#/MiAppContactos/bin/Debug/net8.0/workers/MyWorkerService/appsettings.json
+/Users/kevinrosales/Documents/C#/MiAppContactos/bin/Debug/net8.0/workers/MyWorkerService/obj/MyWorkerService.csproj.nuget.dgspec.json
+/Users/kevinrosales/Documents/C#/MiAppContactos/bin/Debug/net8.0/workers/MyWorkerService/obj/project.assets.json
+/Users/kevinrosales/Documents/C#/MiAppContactos/bin/Debug/net8.0/workers/MyWorkerService/Properties/launchSettings.json

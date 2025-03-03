@@ -7,7 +7,7 @@ public partial class TiposNumero
 {
     public int Id { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string Nombre { get; set; } = string.Empty;
 
-    public virtual ICollection<Contacto> Contactos { get; set; } = new List<Contacto>();
+    public virtual ICollection<Contacto> Contactos { get; set; } = [];
 }

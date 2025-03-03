@@ -21,7 +21,7 @@ public partial class Contacto
 
     public int IdUsuario { get; set; }
 
-    public virtual TiposNumero IdTipoNumeroNavigation { get; set; } = null!;
+    public virtual TiposNumero TiposNumero { get; set; } = null!;
 
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public virtual Usuario NombreUsuario { get; set; } = null!;
 }
